@@ -48,6 +48,9 @@ allprojects {
             content { includeGroupByRegex("com\\.github\\..*") }
         }
 
+        // PaperMC
+        maven("https://repo.papermc.io/repository/maven-public/")
+
         // SuperiorSkyblock2
         maven("https://repo.bg-software.com/repository/api/")
 

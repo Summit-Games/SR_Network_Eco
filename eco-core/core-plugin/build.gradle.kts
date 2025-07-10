@@ -43,12 +43,12 @@ dependencies {
     compileOnly("com.github.EssentialsX:Essentials:2.18.2")
     compileOnly("com.bgsoftware:SuperiorSkyblockAPI:1.8.3")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7")
-    compileOnly("com.github.WhipDevelopment:CrashClaim:f9cd7d92eb")
+    compileOnly("com.github.WhipDevelopment:CrashClaim:c697d3e9ef") // Doesnt work
     compileOnly("com.github.decentsoftware-eu:decentholograms:2.8.5")
     compileOnly("com.github.Gypopo:EconomyShopGUI-API:1.4.6")
     compileOnly("com.github.N0RSKA:ScytherAPI:55a")
     compileOnly("org.black_ixx:playerpoints:3.2.5")
-    compileOnly("com.github.Ssomar-Developement:SCore:3.4.7")
+    //compileOnly("com.github.Ssomar-Developement:SCore:3.4.7") // Doesnt work
     compileOnly("io.lumine:Mythic:5.3.5")
     compileOnly("io.lumine:LumineUtils:1.19-SNAPSHOT")
     compileOnly("com.SirBlobman.combatlogx:CombatLogX-API:10.0.0.0-SNAPSHOT")
