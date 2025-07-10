@@ -43,6 +43,8 @@ public final class ProxyConstants {
     private static String convertVersion(@NotNull final String version) {
         return switch (version) {
             case "v1_21_1" -> "v1_21";
+            case "v1_21_2" -> "v1_21_3";
+            case "v1_21_6" -> "v1_21_7";
             default -> version;
         };
     }

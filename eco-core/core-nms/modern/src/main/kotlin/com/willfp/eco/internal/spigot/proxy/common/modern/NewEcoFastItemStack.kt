@@ -44,12 +44,12 @@ private fun Component.unstyled(): Component {
     return unstyledComponent.append(this)
 }
 
-class NewEcoFastItemStack(
+open class NewEcoFastItemStack(
     private val bukkit: ItemStack
 ) : ImplementedFIS {
     // Cast is there because, try as I might, I can't get IntellIJ to recognise half the classes in the dev bundle
     @Suppress("USELESS_CAST")
-    private val handle = bukkit.asNMSStack() as net.minecraft.world.item.ItemStack
+    val handle = bukkit.asNMSStack() as net.minecraft.world.item.ItemStack
 
     private val pdc = (handle.get(DataComponents.CUSTOM_DATA)?.copyTag() ?: CompoundTag()).makePdc()
 
@@ -154,7 +154,7 @@ class NewEcoFastItemStack(
 
     override fun getDisplayName(): String = displayNameComponent.toLegacy()
 
-    private fun <T> net.minecraft.world.item.ItemStack.modifyComponent(
+    fun <T> net.minecraft.world.item.ItemStack.modifyComponent(
         component: DataComponentType<T>,
         modifier: (T) -> T
     ) {
