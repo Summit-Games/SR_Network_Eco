@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 plugins {
     id("io.papermc.paperweight.userdev")
 }
@@ -12,12 +14,12 @@ dependencies {
 
 tasks {
     compileJava {
-        options.release = 21
+        options.release.set(21)
     }
 
     compileKotlin {
-        kotlinOptions {
-            jvmTarget = "21"
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_21)
         }
     }
 }

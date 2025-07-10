@@ -8,13 +8,47 @@ import org.jetbrains.annotations.NotNull;
  * Represents a packet.
  */
 public class Packet {
-    private @NotNull Object handle;
+    /**
+     * The packet handle.
+     */
+    private Object handle;
 
     /**
-     * @param handle The NMS handle.
+     * Create a new packet.
+     *
+     * @param handle The packet handle.
      */
-    public Packet(@NotNull Object handle) {
+    public Packet(@NotNull final Object handle) {
         this.handle = handle;
+    }
+
+    /**
+     * Get the packet handle.
+     *
+     * @return The packet handle.
+     */
+    public Object getHandle() {
+        return handle;
+    }
+
+    /**
+     * Set the packet handle.
+     *
+     * @param handle The packet handle.
+     */
+    public void setHandle(@NotNull final Object handle) {
+        this.handle = handle;
+    }
+
+    /**
+     * Get the packet handle, compatible with the old record-based packet system.
+     *
+     * @return The packet handle.
+     * @deprecated Use {@link #getHandle()} instead.
+     */
+    @Deprecated
+    public Object handle() {
+        return handle;
     }
 
     /**
@@ -24,21 +58,5 @@ public class Packet {
      */
     void send(@NotNull final Player player) {
         Eco.get().sendPacket(player, this);
-    }
-
-    /**
-     * Get the NMS handle of this packet.
-     * @return The NMS handle.
-     */
-    public @NotNull Object getHandle() {
-        return handle;
-    }
-
-    /**
-     * Set the NMS handle of this packet.
-     * @param handle The NMS handle.
-     */
-    public void setHandle(@NotNull final Object handle) {
-        this.handle = handle;
     }
 }

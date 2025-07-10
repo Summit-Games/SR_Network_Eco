@@ -1,19 +1,21 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 buildscript {
     repositories {
         mavenCentral()
     }
 
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.21")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.0")
     }
 }
 
 plugins {
     id("java-library")
-    id("io.github.goooler.shadow") version "8.1.7"
+    id("com.gradleup.shadow") version "8.3.5"
     id("maven-publish")
     id("java")
-    kotlin("jvm") version "1.9.21"
+    kotlin("jvm") version "2.1.0"
 }
 
 dependencies {
@@ -32,13 +34,17 @@ dependencies {
     implementation(project(path = ":eco-core:core-nms:v1_20_R2", configuration = "reobf"))
     implementation(project(path = ":eco-core:core-nms:v1_20_R3", configuration = "reobf"))
     implementation(project(path = ":eco-core:core-nms:v1_21", configuration = "reobf"))
+    implementation(project(path = ":eco-core:core-nms:v1_21_3", configuration = "reobf"))
+    implementation(project(path = ":eco-core:core-nms:v1_21_4", configuration = "reobf"))
+    implementation(project(path = ":eco-core:core-nms:v1_21_5", configuration = "reobf"))
+    implementation(project(path = ":eco-core:core-nms:v1_21_7", configuration = "reobf"))
 }
 
 allprojects {
     apply(plugin = "java")
     apply(plugin = "java-library")
     apply(plugin = "maven-publish")
-    apply(plugin = "io.github.goooler.shadow")
+    apply(plugin = "com.gradleup.shadow")
     apply(plugin = "kotlin")
 
     repositories {
@@ -48,7 +54,7 @@ allprojects {
             content { includeGroupByRegex("com\\.github\\..*") }
         }
 
-        // PaperMC
+        // Paper
         maven("https://repo.papermc.io/repository/maven-public/")
 
         // SuperiorSkyblock2
@@ -105,12 +111,12 @@ allprojects {
 
     dependencies {
         // Kotlin
-        implementation(kotlin("stdlib", version = "1.9.21"))
+        implementation(kotlin("stdlib", version = "2.1.0"))
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
 
         // Included in spigot jar, no need to move to implementation
         compileOnly("org.jetbrains:annotations:23.0.0")
-        compileOnly("com.google.guava:guava:31.1-jre")
+        compileOnly("com.google.guava:guava:32.0.0-jre")
 
         // Test
         testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
@@ -154,8 +160,8 @@ allprojects {
         }
 
         compileKotlin {
-            kotlinOptions {
-                jvmTarget = "17"
+            compilerOptions {
+                jvmTarget.set(JvmTarget.JVM_17)
             }
         }
 
@@ -178,14 +184,14 @@ allprojects {
         }
 
         withType<JavaCompile>().configureEach {
-            options.release = 17
+            options.release.set(17)
         }
     }
 
     java {
         withSourcesJar()
         toolchain {
-            languageVersion = JavaLanguageVersion.of(21)
+            languageVersion.set(JavaLanguageVersion.of(21))
         }
     }
 }

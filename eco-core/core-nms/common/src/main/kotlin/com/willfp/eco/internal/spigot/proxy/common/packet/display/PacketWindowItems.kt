@@ -52,7 +52,7 @@ open class PacketWindowItems(
     }
 
 
-    fun modifyWindowItems(
+    protected fun modifyWindowItems(
         itemStacks: MutableList<ItemStack>,
         windowId: Int,
         player: Player

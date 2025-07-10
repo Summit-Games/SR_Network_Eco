@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 group = "com.willfp"
 version = rootProject.version
 
@@ -16,12 +18,12 @@ dependencies {
 
 tasks {
     compileJava {
-        options.release = 17
+        options.release.set(17)
     }
 
     compileKotlin {
-        kotlinOptions {
-            jvmTarget = "17"
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
         }
     }
 }
