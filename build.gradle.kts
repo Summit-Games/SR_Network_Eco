@@ -1,52 +1,56 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+
 buildscript {
     repositories {
         mavenCentral()
     }
 
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.21")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.0")
     }
 }
 
 plugins {
     id("java-library")
-    id("io.github.goooler.shadow") version "8.1.7"
+    id("com.gradleup.shadow") version "8.3.5"
     id("maven-publish")
     id("java")
-    kotlin("jvm") version "1.9.21"
+    kotlin("jvm") version "2.1.0"
 }
 
 dependencies {
     implementation(project(":eco-api"))
     implementation(project(path = ":eco-core:core-plugin", configuration = "shadow"))
-    implementation(project(":eco-core:core-proxy"))
     implementation(project(":eco-core:core-backend"))
-    implementation(project(":eco-core:core-backend-modern"))
-    implementation(project(path = ":eco-core:core-nms:v1_17_R1", configuration = "reobf"))
-    implementation(project(path = ":eco-core:core-nms:v1_18_R1", configuration = "reobf"))
-    implementation(project(path = ":eco-core:core-nms:v1_18_R2", configuration = "reobf"))
-    implementation(project(path = ":eco-core:core-nms:v1_19_R1", configuration = "reobf"))
-    implementation(project(path = ":eco-core:core-nms:v1_19_R2", configuration = "reobf"))
-    implementation(project(path = ":eco-core:core-nms:v1_19_R3", configuration = "reobf"))
-    implementation(project(path = ":eco-core:core-nms:v1_20_R1", configuration = "reobf"))
-    implementation(project(path = ":eco-core:core-nms:v1_20_R2", configuration = "reobf"))
-    implementation(project(path = ":eco-core:core-nms:v1_20_R3", configuration = "reobf"))
-    implementation(project(path = ":eco-core:core-nms:v1_21", configuration = "reobf"))
+    implementation(project(path = ":eco-core:core-nms:v1_21_4", configuration = "reobf"))
+    implementation(project(path = ":eco-core:core-nms:v1_21_5", configuration = "reobf"))
+    implementation(project(path = ":eco-core:core-nms:v1_21_6", configuration = "reobf"))
+    implementation(project(path = ":eco-core:core-nms:v1_21_7", configuration = "reobf"))
+    implementation(project(path = ":eco-core:core-nms:v1_21_8", configuration = "reobf"))
+    implementation(project(path = ":eco-core:core-nms:v1_21_10", configuration = "reobf"))
 }
 
 allprojects {
     apply(plugin = "java")
     apply(plugin = "java-library")
     apply(plugin = "maven-publish")
-    apply(plugin = "io.github.goooler.shadow")
+    apply(plugin = "com.gradleup.shadow")
     apply(plugin = "kotlin")
 
     repositories {
         mavenCentral()
+
         maven("https://repo.auxilor.io/repository/maven-public/")
+
         maven("https://jitpack.io") {
             content { includeGroupByRegex("com\\.github\\..*") }
         }
+
+        // Paper
+        maven("https://repo.papermc.io/repository/maven-public/")
+
+        // EssentialsX
+        maven("https://repo.essentialsx.net/releases")
 
         // SuperiorSkyblock2
         maven("https://repo.bg-software.com/repository/api/")
@@ -73,7 +77,7 @@ allprojects {
         maven("https://repo.md-5.net/content/repositories/snapshots/")
 
         // CombatLogX
-        maven("https://nexus.sirblobman.xyz/repository/public/")
+        maven("https://nexus.sirblobman.xyz/public/")
 
         // MythicMobs
         maven("https://mvn.lumine.io/repository/maven-public/")
@@ -98,16 +102,19 @@ allprojects {
 
         // FancyHolograms
         maven("https://repo.fancyplugins.de/releases")
+
+        // Nexo
+        maven("https://repo.nexomc.com/releases")
     }
 
     dependencies {
         // Kotlin
-        implementation(kotlin("stdlib", version = "1.9.21"))
+        implementation(kotlin("stdlib", version = "2.1.0"))
         implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
 
         // Included in spigot jar, no need to move to implementation
         compileOnly("org.jetbrains:annotations:23.0.0")
-        compileOnly("com.google.guava:guava:31.1-jre")
+        compileOnly("com.google.guava:guava:32.0.0-jre")
 
         // Test
         testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
@@ -151,14 +158,15 @@ allprojects {
         }
 
         compileKotlin {
-            kotlinOptions {
-                jvmTarget = "17"
+            compilerOptions {
+                jvmTarget.set(JvmTarget.JVM_21)
             }
         }
 
         compileJava {
             dependsOn(clean)
             options.encoding = "UTF-8"
+            options.isDeprecation = true
         }
 
         test {
@@ -175,14 +183,14 @@ allprojects {
         }
 
         withType<JavaCompile>().configureEach {
-            options.release = 17
+            options.release.set(21)
         }
     }
 
     java {
         withSourcesJar()
         toolchain {
-            languageVersion = JavaLanguageVersion.of(21)
+            languageVersion.set(JavaLanguageVersion.of(21))
         }
     }
 }
@@ -197,9 +205,6 @@ tasks {
         relocate("org.intellij", "com.willfp.eco.libs.intellij")
         relocate("org.jetbrains.annotations", "com.willfp.eco.libs.jetbrains.annotations")
         //relocate("org.jetbrains.exposed", "com.willfp.eco.libs.exposed")
-        relocate("org.objenesis", "com.willfp.eco.libs.objenesis")
-        relocate("org.reflections", "com.willfp.eco.libs.reflections")
-        relocate("javassist", "com.willfp.eco.libs.javassist")
         relocate("javax.annotation", "com.willfp.eco.libs.annotation")
         relocate("com.google.errorprone", "com.willfp.eco.libs.errorprone")
         relocate("com.google.j2objc", "com.willfp.eco.libs.j2objc")

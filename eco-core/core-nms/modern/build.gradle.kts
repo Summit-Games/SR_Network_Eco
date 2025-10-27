@@ -7,17 +7,5 @@ version = rootProject.version
 
 dependencies {
     compileOnly(project(":eco-core:core-nms:common"))
-    paperweight.paperDevBundle("1.21.1-R0.1-SNAPSHOT")
-}
-
-tasks {
-    compileJava {
-        options.release = 21
-    }
-
-    compileKotlin {
-        kotlinOptions {
-            jvmTarget = "21"
-        }
-    }
+    paperweight.paperDevBundle("1.21.5-R0.1-SNAPSHOT")
 }
