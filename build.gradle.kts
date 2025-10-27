@@ -40,9 +40,7 @@ allprojects {
     repositories {
         mavenCentral()
         maven("https://repo.auxilor.io/repository/maven-public/")
-        maven("https://jitpack.io") {
-            content { includeGroupByRegex("com\\.github\\..*") }
-        }
+        maven("https://jitpack.io")
 
         // Paper
         maven("https://repo.papermc.io/repository/maven-public/")
