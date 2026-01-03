@@ -16,6 +16,7 @@ import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.greaterEq
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.mariadb.jdbc.Driver
 import java.math.BigDecimal
 import java.util.*
 import kotlin.math.pow

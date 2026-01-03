@@ -76,6 +76,7 @@ dependencies {
 tasks {
     shadowJar {
         minimize {
+            exclude(dependency("org.mariadb.jdbc:mariadb-java-client:.*"))
             exclude(dependency("org.jetbrains.exposed:.*:.*"))
             exclude(dependency("com.willfp:ModelEngineBridge:.*"))
         }
